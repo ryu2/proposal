@@ -20,12 +20,12 @@
 #endif
 
 #ifdef IOS
-#define kFontName @"ChalkboardSE-Bold"
+#define kFontName @"Zapfino"
 #else
 #define kFontName @"Arial"
 #endif
 
-#define kNumLevels 15
+#define kNumLevels 6
 
 enum {
 	kTagLabel = 1,
@@ -388,21 +388,21 @@ enum {
 		[rockTimer invalidate];
 		rockTimer = nil;
 	}
-	float fontSize = 64.0f;
+	float fontSize = 32.0f;
 	if(IS_IPHONE) fontSize = 32.0f;
 	CCLabelTTF *label;
 	if(currentLevel == kNumLevels) {
-		label = [CCLabelTTF labelWithString:@"Yeah! You did it!" fontName:kFontName fontSize:fontSize];
+		label = [CCLabelTTF labelWithString:@"as we build a marriage of three..." fontName:kFontName fontSize:fontSize];
 		label.color = ccc3(255, 255, 255);
 		label.position = ccp(sw/2, levelHeight+sh*3/8);
 		label.tag = kTagLabel;
 		[self addChild:label z:12];
 		
-		label = [CCLabelTTF labelWithString:@"Finally, you overcame all difficulties on your way. Great job!" fontName:kFontName fontSize:fontSize*3/8];
-		label.color = ccc3(255, 255, 255);
-		label.position = ccp(sw/2, levelHeight+sh*5/16);
-		label.tag = kTagLabel2;
-		[self addChild:label z:12];
+	//	label = [CCLabelTTF labelWithString:@"Finally, you overcame all difficulties on your way. Great job!" fontName:kFontName fontSize:fontSize*3/8];
+	//	label.color = ccc3(255, 255, 255);
+	//	label.position = ccp(sw/2, levelHeight+sh*5/16);
+	//	label.tag = kTagLabel2;
+	//	[self addChild:label z:12];
 
 //		label = [CCLabelTTF labelWithString:@"Tap to go back to start screen" fontName:kFontName fontSize:fontSize/4];
 //		label.color = ccc3(255, 255, 255);
@@ -411,18 +411,21 @@ enum {
 //		[self addChild:label z:12];
 		
 	} else {
-		label = [CCLabelTTF labelWithString:@"Well Done!" fontName:kFontName fontSize:fontSize];
+    static NSString* messages[] = { nil, @"A divine encounter...", @"Leading to adventures near and far...", @"and learning growing and humility...", @"two wanders overcoming obstacles...", @"working together as one...", @"as we build a marriage of three..." };
+    
+		label = [CCLabelTTF labelWithString:messages[currentLevel] fontName:kFontName fontSize:fontSize];
 		label.color = ccc3(255, 255, 255);
 		label.position = ccp(sw/2, levelHeight+sh*3/8);
 		label.tag = kTagLabel;
 		[self addChild:label z:12];
-		
+    
+		/*
 		label = [CCLabelTTF labelWithString:[NSString stringWithFormat:@"Level %d completed",currentLevel] fontName:kFontName fontSize:fontSize*3/8];
 		label.color = ccc3(255, 255, 255);
 		label.position = ccp(sw/2, levelHeight+sh*5/16);
 		label.tag = kTagLabel2;
 		[self addChild:label z:12];
-		
+		*/
 //		label = [CCLabelTTF labelWithString:@"Tap to continue" fontName:kFontName fontSize:fontSize*3/8];
 //		label.color = ccc3(255, 255, 255);
 //		label.position = ccp(sw/2, levelHeight-sh*3/8);
