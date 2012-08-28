@@ -58,10 +58,75 @@ enum {
 
 @implementation Game
 
+@synthesize spriteSheetPrefix;
+
 + (CCScene*)scene {
 	CCScene *scene = [CCScene node];
 	[scene addChild:[Game node]];
 	return scene;
+}
+
+- (void) setup:(NSString*) prefix {
+  
+  if ([self.spriteSheetPrefix isEqualToString:prefix]) {
+    return;
+  }
+       
+  self.spriteSheetPrefix = prefix;
+  
+  [[CCSpriteFrameCache sharedSpriteFrameCache] removeSpriteFrames]; 
+  [self removeChild:batch2 cleanup:YES];
+  [self removeChild:batch1 cleanup:YES];
+  [self removeChild:ropeBatch cleanup:YES];
+  
+  
+  // sprite sheet
+  [[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:[NSString stringWithFormat:@"%@.plist", prefix]];
+  NSString* pngFileName = [NSString stringWithFormat:@"%@.png", prefix];
+  batch1 = [[CCSpriteBatchNode alloc] initWithFile:pngFileName capacity:50];
+  [self addChild:batch1];
+  batch2 = [[CCSpriteBatchNode alloc] initWithFile:pngFileName capacity:50];
+  [self addChild:batch2 z:10];  
+  
+  
+  // heroes and rope
+  hero1 = [[Hero alloc] initWithPosition:ccp(sw/2-ropeLength/2.0f,sh/16)];
+  [batch2 addChild:hero1];
+  hero2 = [[Hero alloc] initWithPosition:ccp(sw/2+ropeLength/2.0f,sh/16)];
+  [batch2 addChild:hero2];
+  
+  ropeBatch = [CCSpriteBatchNode batchNodeWithFile:@"rope.png"];
+  rope = [[VRope alloc] initWithPoints:hero1.position pointB:hero2.position spriteSheet:ropeBatch];
+  
+  [self addChild:ropeBatch z:1];
+  
+  // snap feedback
+  snapFeedback = [[CCSprite alloc] initWithSpriteFrameName:@"snapFeedback.png"];
+  [batch1 addChild:snapFeedback];
+  snapFeedback.opacity = 0;
+  
+  // rock
+  rock = [[Rock alloc] initWithPosition:CGPointZero];
+  rock.opacity = 0;
+  [batch1 addChild:rock z:10];
+  
+  // rock alert
+  rockAlert = [[CCSprite alloc] initWithSpriteFrameName:@"rockAlert.png"];
+  [batch1 addChild:rockAlert z:13];
+  rockAlert.opacity = 0;
+  
+  // star icon
+  CCSprite *sprite;
+  sprite = [CCSprite spriteWithSpriteFrameName:@"starIcon.png"];
+  sprite.position = ccp(32,sh-32);
+  [batch1 addChild:sprite z:15];
+  starIcon = [sprite retain];
+  
+  // menu button
+  sprite = [CCSprite spriteWithSpriteFrameName:@"menuButton.png"];
+  sprite.position = ccp(sw-32,sh-32);
+  [batch1 addChild:sprite z:15];
+  menuButton = [sprite retain];  
 }
 
 - (id)init {
@@ -86,50 +151,8 @@ enum {
 		snapDist = sh*64.0f/1024;
 		
 		// sprite sheet
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites.plist"];
-		batch1 = [[CCSpriteBatchNode alloc] initWithFile:@"sprites.png" capacity:50];
-		[self addChild:batch1];
-		batch2 = [[CCSpriteBatchNode alloc] initWithFile:@"sprites.png" capacity:50];
-		[self addChild:batch2 z:10];
+    [self setup:@"sprites"];
 
-		// heroes and rope
-		hero1 = [[Hero alloc] initWithPosition:ccp(sw/2-ropeLength/2.0f,sh/16)];
-		[batch2 addChild:hero1];
-		hero2 = [[Hero alloc] initWithPosition:ccp(sw/2+ropeLength/2.0f,sh/16)];
-		[batch2 addChild:hero2];
-
-		ropeBatch = [CCSpriteBatchNode batchNodeWithFile:@"rope.png"];
-		rope = [[VRope alloc] initWithPoints:hero1.position pointB:hero2.position spriteSheet:ropeBatch];
-
-		[self addChild:ropeBatch z:1];
-		
-		// snap feedback
-		snapFeedback = [[CCSprite alloc] initWithSpriteFrameName:@"snapFeedback.png"];
-		[batch1 addChild:snapFeedback];
-		snapFeedback.opacity = 0;
-		
-		// rock
-		rock = [[Rock alloc] initWithPosition:CGPointZero];
-		rock.opacity = 0;
-		[batch1 addChild:rock z:10];
-		
-		// rock alert
-		rockAlert = [[CCSprite alloc] initWithSpriteFrameName:@"rockAlert.png"];
-		[batch1 addChild:rockAlert z:13];
-		rockAlert.opacity = 0;
-		
-		// star icon
-		CCSprite *sprite;
-		sprite = [CCSprite spriteWithSpriteFrameName:@"starIcon.png"];
-		sprite.position = ccp(32,sh-32);
-		[batch1 addChild:sprite z:15];
-		starIcon = [sprite retain];
-		
-		// menu button
-		sprite = [CCSprite spriteWithSpriteFrameName:@"menuButton.png"];
-		sprite.position = ccp(sw-32,sh-32);
-		[batch1 addChild:sprite z:15];
-		menuButton = [sprite retain];
 
 		// star counter
 		float fontSize = 24;
@@ -148,7 +171,7 @@ enum {
 		rockTimer = nil;
 		
 		currentLevel = 0;
-		nextLevel = [[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"];
+		nextLevel = 0; //[[NSUserDefaults standardUserDefaults] integerForKey:@"currentLevel"];
 		if(!nextLevel) {
 			nextLevel = 1;
 		}
@@ -280,7 +303,8 @@ enum {
 }
 
 - (void)resetLevel {
-	
+
+  
 	if(nextLevel != currentLevel) {
 		currentLevel = nextLevel;
 		if(currentLevel > kNumLevels) {
@@ -420,6 +444,8 @@ enum {
 	} else {
 		[[NSUserDefaults standardUserDefaults] setInteger:nextLevel forKey:@"currentLevel"];
 	}
+  
+
 	
 //	[self sparkleAt:ccp(384-8, levelHeight+64)];
 }
@@ -507,6 +533,13 @@ enum {
 	}
 
 	if(!gameInProgress) {
+    
+    if (nextLevel == 2) {
+      [self setup:@"sprites_test"];	
+    } else if (nextLevel == 3) {
+      [self setup:@"sprites_test2"];	    
+    }       
+    
 		[self resetLevel];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"grab.caf"];
 		return;

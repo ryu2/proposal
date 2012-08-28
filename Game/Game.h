@@ -51,4 +51,6 @@
 }
 + (CCScene*)scene;
 
+@property (nonatomic, retain) NSString* spriteSheetPrefix;
+
 @end

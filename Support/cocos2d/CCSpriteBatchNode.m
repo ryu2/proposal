@@ -229,8 +229,13 @@ static 	SEL selUpdate = NULL;
 	if (sprite == nil)
 		return;
 	
+  if (![children_ containsObject:sprite]) {
+    return;
+  }
 	NSAssert([children_ containsObject:sprite], @"CCSpriteBatchNode doesn't contain the sprite. Can't remove it");
 	
+  
+  
 	// cleanup before removing
 	[self removeSpriteFromAtlas:sprite];
 	
