@@ -53,8 +53,8 @@
 		[wall.texture setTexParameters:&tp];
 
 		// sprite sheet
-		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites.plist"];
-		CCSpriteBatchNode *batch = [[CCSpriteBatchNode alloc] initWithFile:@"sprites.png" capacity:50];
+		[[CCSpriteFrameCache sharedSpriteFrameCache] addSpriteFramesWithFile:@"sprites0.plist"];
+		CCSpriteBatchNode *batch = [[CCSpriteBatchNode alloc] initWithFile:@"sprites0.png" capacity:50];
 		[self addChild:batch];
 		
 		// sprites
@@ -71,7 +71,7 @@
 		sprite = [CCSprite spriteWithSpriteFrameName:@"gameTitle.png"];
 		sprite.position = ccp(sw/2, sh*7/8);
 		[batch addChild:sprite];
-
+/*
 		sprite = [CCSprite spriteWithSpriteFrameName:@"moreGamesButton.png"];
 		sprite.position = ccp(sw/4, sh/2);
 		sprite.opacity = 0;
@@ -80,14 +80,14 @@
 		[sprite runAction:[CCSequence actions:a1,a2,nil]];
 		[batch addChild:sprite];
 		moreGamesButton = [sprite retain];
-		
+	*/	
 		sprite = [CCSprite spriteWithSpriteFrameName:@"playButton.png"];
 		sprite.position = ccp(sw/2, sh/2);
 		sprite.opacity = 0;
 		[sprite runAction:[CCFadeIn actionWithDuration:0.2f]];
 		[batch addChild:sprite];
 		playButton = [sprite retain];
-
+/*
 		sprite = [CCSprite spriteWithSpriteFrameName:@"gameSourcesButton.png"];
 		sprite.position = ccp(sw*3/4, sh/2);
 		sprite.opacity = 0;
@@ -96,12 +96,12 @@
 		[sprite runAction:[CCSequence actions:a1,a2,nil]];
 		[batch addChild:sprite];
 		gameSourcesButton = [sprite retain];
-		
+	*/	
 		sprite = [CCSprite spriteWithSpriteFrameName:@"gpcLogo.png"];
 		sprite.position = ccp(sw*5/48, sh*11.7f/256);
 		sprite.opacity = 0;
-		a1 = [CCDelayTime actionWithDuration:0.6f];
-		a2 = [CCFadeIn actionWithDuration:0.4f];
+		id a1 = [CCDelayTime actionWithDuration:0.6f];
+		id a2 = [CCFadeIn actionWithDuration:0.4f];
 		[sprite runAction:[CCSequence actions:a1,a2,nil]];
 		[batch addChild:sprite];
 
@@ -119,7 +119,7 @@
 		float fontSize = 12.0f;
 		if(IS_IPHONE) fontSize = 6.0f;
 		
-		label = [CCLabelTTF labelWithString:@"Created by @haqu for Game Prototype Challenge using Cocos2D." fontName:@"Verdana-Bold" fontSize:fontSize];
+		label = [CCLabelTTF labelWithString:@"" fontName:@"Verdana-Bold" fontSize:fontSize];  // Created by haqu...
 		label.position = ccp(sw/2, sh*5/256);
 		label.opacity = 0;
 		a1 = [CCDelayTime actionWithDuration:0.6f];
