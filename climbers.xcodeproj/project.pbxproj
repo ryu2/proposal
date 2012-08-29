@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4CE2B8BC15E771340097CBBC /* sprites_test.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2B8BB15E771340097CBBC /* sprites_test.png */; };
-		4CE2B8BF15E7737F0097CBBC /* sprites_test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2B8BE15E7737F0097CBBC /* sprites_test.plist */; };
 		4CE2B8C215E778A00097CBBC /* special2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2B8C015E778A00097CBBC /* special2.plist */; };
 		4CE2B8C315E778A00097CBBC /* special2.png in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2B8C115E778A00097CBBC /* special2.png */; };
 		4CE2B8C615E9912E0097CBBC /* sprites_test2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4CE2B8C415E9912E0097CBBC /* sprites_test2.plist */; };
@@ -190,8 +188,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4CE2B8BB15E771340097CBBC /* sprites_test.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sprites_test.png; sourceTree = "<group>"; };
-		4CE2B8BE15E7737F0097CBBC /* sprites_test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sprites_test.plist; sourceTree = "<group>"; };
 		4CE2B8C015E778A00097CBBC /* special2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = special2.plist; sourceTree = "<group>"; };
 		4CE2B8C115E778A00097CBBC /* special2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = special2.png; sourceTree = "<group>"; };
 		4CE2B8C415E9912E0097CBBC /* sprites_test2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sprites_test2.plist; sourceTree = "<group>"; };
@@ -944,8 +940,6 @@
 				4CE2B8C515E9912E0097CBBC /* sprites_test2.png */,
 				4CE2B8C015E778A00097CBBC /* special2.plist */,
 				4CE2B8C115E778A00097CBBC /* special2.png */,
-				4CE2B8BE15E7737F0097CBBC /* sprites_test.plist */,
-				4CE2B8BB15E771340097CBBC /* sprites_test.png */,
 				4DB849DE1386231A0045113B /* digits.fnt */,
 				4DB849DF1386231A0045113B /* digits.png */,
 				4DB849E01386231A0045113B /* fire.png */,
@@ -1084,8 +1078,6 @@
 				4DB84A0B138623320045113B /* 14.svg in Resources */,
 				4DB84A0C138623320045113B /* 15.svg in Resources */,
 				4DBA1A8813862C25005A71DE /* Default-Portrait~ipad.png in Resources */,
-				4CE2B8BC15E771340097CBBC /* sprites_test.png in Resources */,
-				4CE2B8BF15E7737F0097CBBC /* sprites_test.plist in Resources */,
 				4CE2B8C215E778A00097CBBC /* special2.plist in Resources */,
 				4CE2B8C315E778A00097CBBC /* special2.png in Resources */,
 				4CE2B8C615E9912E0097CBBC /* sprites_test2.plist in Resources */,
