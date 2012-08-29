@@ -411,7 +411,7 @@ enum {
 //		[self addChild:label z:12];
 		
 	} else {
-    static NSString* messages[] = { nil, @"A divine encounter...", @"Leading to adventures near and far...", @"and learning growing and humility...", @"two wanders overcoming obstacles...", @"working together as one...", @"as we build a marriage of three..." };
+    static NSString* messages[] = { nil, @"A divine encounter...", @"Leading to adventures near and far...", @"and learning growing and humility...", @"two wanderers overcoming obstacles...", @"working together as one...", @"as we build a marriage of three..." };
     
 		label = [CCLabelTTF labelWithString:messages[currentLevel] fontName:kFontName fontSize:fontSize];
 		label.color = ccc3(255, 255, 255);
@@ -537,11 +537,7 @@ enum {
 
 	if(!gameInProgress) {
     
-    if (nextLevel == 2) {
-      [self setup:@"sprites_test"];	
-    } else if (nextLevel == 3) {
-      [self setup:@"sprites_test2"];	    
-    }       
+    [self setup:[NSString stringWithFormat:@"sprites%d", nextLevel]];
     
 		[self resetLevel];
 		[[SimpleAudioEngine sharedEngine] playEffect:@"grab.caf"];
